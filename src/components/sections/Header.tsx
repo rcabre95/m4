@@ -1,19 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import Lion from "../icons/Lion";
 
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-amber-500/20 bg-black/95 backdrop-blur">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container flex h-16 w-full items-center justify-between px-8 md:px-12 mx-auto">
             <div className="flex items-center gap-2">
-            <Image
-                src="/placeholder.svg?height=40&width=40"
-                width={40}
-                height={40}
-                alt="Lion Logo"
-                className="h-10 w-10"
-            />
-            <span className="text-xl font-bold text-white">ALPHA OMEGA</span>
+            <Lion className="h-10 w-10 text-amber-500" />
+            <span className="text-xl font-bold text-white">M4</span>
             </div>
             <nav className="hidden md:flex">
             <ul className="flex items-center gap-6">

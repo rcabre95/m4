@@ -24,7 +24,7 @@ export default function EventCard({imageSrc, imageAlt, timing, title, descriptio
         </div>
         <div className="p-6">
             <div className="mb-2 text-sm font-medium text-amber-500">{timing}</div>
-            <h3 className="mb-2 text-xl font-bold">{title}</h3>
+            <h3 className="mb-2 text-xl font-bold text-black">{title}</h3>
             <p className="mb-4 text-muted-foreground text-gray-600">
             {description}
             </p>

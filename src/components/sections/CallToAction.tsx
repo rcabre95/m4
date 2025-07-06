@@ -9,7 +9,7 @@ export default function CallToAction() {
             <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">Join Our Brotherhood</h2>
             <div className="mb-8 h-1 w-20 bg-amber-500 mx-auto"></div>
             <p className="mb-12 text-muted-foreground text-gray-300">
-            Interested in becoming a member of Alpha Omega? Here's what you need to know about our membership
+            Interested in becoming a member of M4? Here's what you need to know about our membership
             process.
             </p>
         </div>
@@ -47,8 +47,7 @@ export default function CallToAction() {
             </div>
             <h3 className="mb-2 text-xl font-bold">Initiation</h3>
             <p className="text-muted-foreground text-gray-400">
-                After successfully completing the pledging process, you'll be initiated as a full member of Alpha
-                Omega.
+                After successfully completing the pledging process, you'll be initiated as a full member of M4.
             </p>
             </div>
         </div>

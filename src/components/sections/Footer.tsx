@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Lion from '../icons/Lion'
 
 export default function Footer() {
   return (
@@ -9,14 +10,8 @@ export default function Footer() {
             <div className="grid gap-8 md:grid-cols-3">
             <div>
                 <div className="flex items-center gap-2 mb-4">
-                <Image
-                    src="/placeholder.svg?height=40&width=40"
-                    width={40}
-                    height={40}
-                    alt="Lion Logo"
-                    className="h-10 w-10"
-                />
-                <span className="text-xl font-bold text-white">ALPHA OMEGA</span>
+                <Lion className="h-10 w-10 text-amber-500" />
+                <span className="text-xl font-bold text-white">M4</span>
                 </div>
                 <p className="text-muted-foreground text-gray-400 mb-4">
                 A Christian fraternity dedicated to developing men of integrity, faith, and leadership.
@@ -144,7 +139,7 @@ export default function Footer() {
             </div>
             <div className="mt-8 border-t border-gray-800 pt-8 text-center">
             <p className="text-sm text-gray-400">
-                &copy; {new Date().getFullYear()} Alpha Omega Christian Fraternity. All rights reserved.
+                &copy; {new Date().getFullYear()} M4 Christian Fraternity. All rights reserved.
             </p>
             </div>
         </div>
