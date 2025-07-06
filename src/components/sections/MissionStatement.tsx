@@ -5,7 +5,7 @@ import React from 'react'
 
 export default function MissionStatement() {
   return (
-    <section id="mission" className="bg-black py-16 px-8 md:px-16 md:py-24">
+    <section id="mission" className="bg-black py-16 px-6 md:px-16 md:py-24">
         <div className=" mx-auto">
         <div className="grid items-center gap-8 md:grid-cols-2">
             <div>

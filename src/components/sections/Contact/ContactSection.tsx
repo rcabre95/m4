@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone } from 'lucide-react'
 import React from 'react'
-import ContactForm from '../ContactForm'
+import ContactForm from './ContactForm'
 
 export default function ContactSection() {
   return (

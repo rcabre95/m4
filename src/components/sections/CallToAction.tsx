@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function CallToAction() {
   return (
-    <section id="membership" className="bg-gradient-to-b from-black to-gray-900 py-16 md:py-24 text-white">
+    <section id="membership" className="bg-gradient-to-b from-black to-gray-900 px-6 md:px-24 py-16 md:py-24 text-white">
         <div className="container mx-auto">
         <div className="mx-auto max-w-3xl text-center">
             <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">Join Our Brotherhood</h2>

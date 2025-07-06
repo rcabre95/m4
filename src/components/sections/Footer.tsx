@@ -5,7 +5,7 @@ import Lion from '../icons/Lion'
 
 export default function Footer() {
   return (
-    <footer className="bg-black py-12 text-white">
+    <footer className="bg-black py-12 text-white px-6 md:px-24">
         <div className="container mx-auto">
             <div className="grid gap-8 md:grid-cols-3">
             <div>

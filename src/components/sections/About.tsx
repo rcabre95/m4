@@ -6,7 +6,7 @@ import Charity from '../icons/Charity'
 
 export default function About() {
   return (
-    <section id="about" className="bg-white py-16 md:py-24">
+    <section id="about" className="bg-white px-6 md:px-24 py-16 md:py-24">
         <div className="container mx-auto">
         <div className="mx-auto max-w-3xl text-center">
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-4xl">About Our Brotherhood</h2>

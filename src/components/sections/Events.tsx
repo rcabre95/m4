@@ -30,7 +30,7 @@ const eventData = [
 
 export default function Events() {
   return (
-    <section id="events" className="bg-white py-16 md:py-24">
+    <section id="events" className="bg-white px-6 md:px-24 py-16 md:py-24">
         <div className="container mx-auto">
         <div className="mx-auto max-w-3xl text-center">
             <h2 className="mb-4 text-3xl font-bold tracking-tight text-black md:text-4xl">Upcoming Events</h2>

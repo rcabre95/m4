@@ -5,7 +5,7 @@ import Lion from '../icons/Lion'
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-black py-24 md:py-32">
+    <section className="relative overflow-hidden bg-black py-24 md:py-32 px-6 md:px-24">
         <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/80 via-black/50 to-black"></div>
         <Image
         src="/placeholder.svg?height=1080&width=1920"

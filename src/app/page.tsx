@@ -1,7 +1,7 @@
 import { ChevronRight, Mail, MapPin, Phone } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import ContactForm from "@/components/sections/ContactForm"
+import ContactForm from "@/components/sections/Contact/ContactForm"
 import Header from "@/components/sections/Header"
 import Hero from "@/components/sections/Hero"
 import About from "@/components/sections/About"

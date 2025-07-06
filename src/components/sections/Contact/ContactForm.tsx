@@ -1,144 +1,125 @@
 "use client"
-
-import type React from "react"
-import { useState } from "react"
+import { sendEmail } from '@/lib/send-email';
+import { useForm } from "react-hook-form"
 import { useToast } from "@/hooks/use-toast"
+
+interface ContactFormInputs {
+  name: string
+  email: string
+  phone: string
+  subject: string
+  message: string
+}
 
 export default function ContactForm() {
   const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    toast({
-      title: "Message Sent",
-      description: "Thank you for contacting us. We'll get back to you soon!",
-    })
-
-    setFormData({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting, errors },
+  } = useForm<ContactFormInputs>({
+    defaultValues: {
       name: "",
       email: "",
       phone: "",
       subject: "",
       message: "",
-    })
+    },
+  })
 
-    setIsSubmitting(false)
+  const onSubmit = async (data: ContactFormInputs) => {
+    let email = await sendEmail(data.name, data.email, data.subject, data.message);
+                console.log(email.status)
+                if (email.status === 200) {
+                    alert("Thanks for the message! I will get back to you at the email you provided.")
+                }
+                if (email.status === 500) {
+                    alert("Something went wrong. Please try messaging me on my linkedin provided below.")
+                }
+                if (email.status === 450) {
+                    alert("Not sure what you're trying to accomplish here... This is just a portfolio website.")
+                }
+    toast({
+      title: "Message Sent",
+      description: "Thank you for contacting us. We'll get back to you soon!",
+    })
+    reset()
   }
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
       <h3 className="mb-4 text-xl font-bold text-black">Send Us a Message</h3>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
-            <label
-              htmlFor="name"
-              className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
+            <label htmlFor="name" className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               Name
             </label>
             <input
               id="name"
-              name="name"
+              {...register("name", { required: "Name is required" })}
               placeholder="Your name"
-              required
-              value={formData.name}
-              onChange={handleChange}
               className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={isSubmitting}
             />
+            {errors.name && <span className="text-xs text-red-500">{errors.name.message}</span>}
           </div>
           <div className="space-y-2">
-            <label
-              htmlFor="email"
-              className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
+            <label htmlFor="email" className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               Email
             </label>
             <input
               id="email"
-              name="email"
               type="email"
+              {...register("email", { required: "Email is required" })}
               placeholder="Your email"
-              required
-              value={formData.email}
-              onChange={handleChange}
               className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={isSubmitting}
             />
+            {errors.email && <span className="text-xs text-red-500">{errors.email.message}</span>}
           </div>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2">
-            <label
-              htmlFor="phone"
-              className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
+            <label htmlFor="phone" className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               Phone
             </label>
             <input
               id="phone"
-              name="phone"
               type="tel"
+              {...register("phone")}
               placeholder="Your phone number"
-              value={formData.phone}
-              onChange={handleChange}
               className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={isSubmitting}
             />
           </div>
           <div className="space-y-2">
-            <label
-              htmlFor="subject"
-              className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
+            <label htmlFor="subject" className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
               Subject
             </label>
             <input
               id="subject"
-              name="subject"
+              {...register("subject", { required: "Subject is required" })}
               placeholder="Subject"
-              required
-              value={formData.subject}
-              onChange={handleChange}
               className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={isSubmitting}
             />
+            {errors.subject && <span className="text-xs text-red-500">{errors.subject.message}</span>}
           </div>
         </div>
         <div className="space-y-2">
-          <label
-            htmlFor="message"
-            className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
+          <label htmlFor="message" className="text-black text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
             Message
           </label>
           <textarea
             id="message"
-            name="message"
+            {...register("message", { required: "Message is required" })}
             placeholder="Your message"
-            required
             className="flex min-h-[120px] w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-            value={formData.message}
-            onChange={handleChange}
+            disabled={isSubmitting}
           />
+          {errors.message && <span className="text-xs text-red-500">{errors.message.message}</span>}
         </div>
         <button
           type="submit"
