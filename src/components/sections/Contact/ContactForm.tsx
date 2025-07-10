@@ -1,9 +1,9 @@
 "use client"
 import { sendEmail } from '@/lib/send-email';
 import { useForm } from "react-hook-form"
-import { useToast } from "@/hooks/use-toast"
+import toast from 'react-hot-toast';
 
-interface ContactFormInputs {
+export interface ContactFormInputs {
   name: string
   email: string
   phone: string
@@ -12,7 +12,6 @@ interface ContactFormInputs {
 }
 
 export default function ContactForm() {
-  const { toast } = useToast()
   const {
     register,
     handleSubmit,
@@ -29,22 +28,14 @@ export default function ContactForm() {
   })
 
   const onSubmit = async (data: ContactFormInputs) => {
-    let email = await sendEmail(data.name, data.email, data.subject, data.message);
-                console.log(email.status)
-                if (email.status === 200) {
-                    alert("Thanks for the message! I will get back to you at the email you provided.")
-                }
-                if (email.status === 500) {
-                    alert("Something went wrong. Please try messaging me on my linkedin provided below.")
-                }
-                if (email.status === 450) {
-                    alert("Not sure what you're trying to accomplish here... This is just a portfolio website.")
-                }
-    toast({
-      title: "Message Sent",
-      description: "Thank you for contacting us. We'll get back to you soon!",
-    })
-    reset()
+    sendEmail(data).then((email) => {
+      if (email) {
+        toast.success("Message sent!",);
+      } else {
+        toast.error("Something went wrong...")
+      }
+    });
+    reset();
   }
 
   return (
@@ -60,7 +51,7 @@ export default function ContactForm() {
               id="name"
               {...register("name", { required: "Name is required" })}
               placeholder="Your name"
-              className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              className="text-black flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               disabled={isSubmitting}
             />
             {errors.name && <span className="text-xs text-red-500">{errors.name.message}</span>}
@@ -74,7 +65,7 @@ export default function ContactForm() {
               type="email"
               {...register("email", { required: "Email is required" })}
               placeholder="Your email"
-              className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              className="text-black flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               disabled={isSubmitting}
             />
             {errors.email && <span className="text-xs text-red-500">{errors.email.message}</span>}
@@ -90,7 +81,7 @@ export default function ContactForm() {
               type="tel"
               {...register("phone")}
               placeholder="Your phone number"
-              className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              className="text-black flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               disabled={isSubmitting}
             />
           </div>
@@ -102,7 +93,7 @@ export default function ContactForm() {
               id="subject"
               {...register("subject", { required: "Subject is required" })}
               placeholder="Subject"
-              className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              className="text-black flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               disabled={isSubmitting}
             />
             {errors.subject && <span className="text-xs text-red-500">{errors.subject.message}</span>}
@@ -116,7 +107,7 @@ export default function ContactForm() {
             id="message"
             {...register("message", { required: "Message is required" })}
             placeholder="Your message"
-            className="flex min-h-[120px] w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="text-black flex min-h-[120px] w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             disabled={isSubmitting}
           />
           {errors.message && <span className="text-xs text-red-500">{errors.message.message}</span>}
