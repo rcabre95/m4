@@ -3,7 +3,7 @@ import EventCard from '../ui/Cards/EventCard'
 
 const eventData = [
   {
-    imageSrc: "/placeholder.svg?height=400&width=600",
+    imageSrc: "/images/cross.png",
     imageAlt: "Weekly Bible Study",
     timing: "Every Thursday • 7:00 PM",
     title: "Weekly Bible Study",
@@ -11,7 +11,7 @@ const eventData = [
     location: "Student Center, Room 203"
   },
   {
-    imageSrc: "/placeholder.svg?height=400&width=600",
+    imageSrc: "/images/key.png",
     imageAlt: "Community Service Day",
     timing: "July 15 • 9:00 AM",
     title: "Community Service Day",
@@ -19,7 +19,7 @@ const eventData = [
     location: "Community Center"
   },
   {
-    imageSrc: "/placeholder.svg?height=400&width=600",
+    imageSrc: "/images/lion.png",
     imageAlt: "Brotherhood Retreat",
     timing: "August 5-7",
     title: "Brotherhood Retreat",

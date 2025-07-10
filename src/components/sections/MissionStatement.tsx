@@ -30,7 +30,7 @@ export default function MissionStatement() {
             </div>
             <div className="relative h-[400px] overflow-hidden rounded-lg">
             <Image
-                src="/placeholder.svg?height=800&width=600"
+                src="/images/brotherhood.jpeg"
                 alt="Brotherhood in action"
                 fill
                 className="object-cover"
