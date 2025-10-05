@@ -1,6 +1,6 @@
 // lib/contentful.ts
 import { createClient } from 'contentful'
-import type { TypePage } from './types'
+import type { TypePage, TypeFooterData } from './types'
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID!,
@@ -55,6 +55,24 @@ export async function getPageContent(slug: string): Promise<TypePage | null> {
     return entries.items[0] as unknown as TypePage
   } catch (error) {
     console.error('Error fetching page content:', error)
+    return null
+  }
+}
+
+export async function getFooterData(): Promise<TypeFooterData | null> {
+  try {
+    const entries = await client.getEntries({
+      content_type: 'footerData',
+      limit: 1
+    })
+    
+    if (!entries.items || entries.items.length === 0) {
+      return null
+    }
+    
+    return entries.items[0] as unknown as TypeFooterData
+  } catch (error) {
+    console.error('Error fetching footer data:', error)
     return null
   }
 }

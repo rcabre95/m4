@@ -8,29 +8,28 @@ import About from "@/components/sections/About"
 import DarkListSection from "@/components/sections/DarkListSection"
 import ContactSection from "@/components/sections/Contact/ContactSection"
 import Footer from "@/components/sections/Footer"
-import { getHero, getPageContent } from "@/lib/contentful"
+import { getFooterData, getHero, getPageContent } from "@/lib/contentful"
 import DescriptionSection from "@/components/sections/DescriptionSection"
 import LightListSection from "@/components/sections/LightListSection"
 
 export default async function Home() {
-  const heroData = await getHero();
-  const hero = heroData[0];
   const pageData: any = await getPageContent('home');
+  const footerData = await getFooterData();
   const { heroSection, aboutSection, missionSection, eventSection, joinSection, contactSection } = pageData.fields;
-  console.log(pageData.fields);
+  console.log(footerData?.fields);
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">
         <Hero
-          header={hero?.fields?.heading || ''}
-          subheading={hero?.fields?.subheading || ''}
-          description={hero?.fields?.description || ''}
-          primaryCtaText={hero?.fields?.primaryCtaText || ''}
-          primaryCtaLink={hero?.fields?.primaryCtaLink || ''}
-          secondaryCtaText={hero?.fields?.secondaryCtaText || ''}
-          secondaryCtaLink={hero?.fields?.secondaryCtaLink || ''}
+          header={heroSection?.fields?.heading || ''}
+          subheading={heroSection?.fields?.subheading || ''}
+          description={heroSection?.fields?.description || ''}
+          primaryCtaText={heroSection?.fields?.primaryCtaText || ''}
+          primaryCtaLink={heroSection?.fields?.primaryCtaLink || ''}
+          secondaryCtaText={heroSection?.fields?.secondaryCtaText || ''}
+          secondaryCtaLink={heroSection?.fields?.secondaryCtaLink || ''}
         />
         <About
           title={aboutSection?.fields?.title}
@@ -63,7 +62,14 @@ export default async function Home() {
           meetingTimes={contactSection.fields.meetingTimes}
         />
       </main>
-      <Footer />
+      <Footer
+        showNewsletterForm={Boolean(footerData?.fields?.showNewsletterForm) || false}
+        facebookLink={footerData?.fields?.facebookLink as string | undefined}
+        instagramLink={footerData?.fields?.instagramLink as string | undefined}
+        twitterLink={footerData?.fields?.twitterLink as string | undefined}
+        linkedinLink={footerData?.fields?.linkedinLink as string | undefined}
+        showQuickLinks={Boolean(footerData?.fields?.showQuickLinks) || false}
+      />
     </div>
   )
 }

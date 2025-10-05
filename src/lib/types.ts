@@ -1,5 +1,10 @@
 import type { Asset, Entry, EntryFields, EntrySkeletonType } from "contentful";
 
+// Icon Props Interface
+export interface IIconProps {
+    className?: string;
+}
+
 // Pillar Types (define first since it's referenced by others)
 export interface TypePillarFields {
     title: string;
@@ -161,6 +166,22 @@ export interface TypeNavigationSkeleton extends EntrySkeletonType {
 }
 
 export type TypeNavigation = Entry<TypeNavigationSkeleton>;
+
+export interface TypeFooterDataFields {
+    showNewsletterForm?: EntryFields.Boolean;
+    facebookLink?: EntryFields.Symbol;
+    instagramLink?: EntryFields.Symbol;
+    twitterLink?: EntryFields.Symbol;
+    linkedinLink?: EntryFields.Symbol;
+    showQuickLinks?: EntryFields.Boolean;
+}
+
+export interface TypeFooterDataSkeleton extends EntrySkeletonType {
+    contentTypeId: "footerData";
+    fields: TypeFooterDataFields;
+}
+
+export type TypeFooterData = Entry<TypeFooterDataSkeleton>;
 
 // Page Types
 export interface TypePageFields {
