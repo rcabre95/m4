@@ -2,7 +2,14 @@ import { Mail, MapPin, Phone } from 'lucide-react'
 import React from 'react'
 import ContactForm from './ContactForm'
 
-export default function ContactSection() {
+interface IContactSectionProps {
+    address: string;
+    email: string;
+    phone: string;
+    meetingTimes: Array<{ fields: { eventName: string; day: string; time: string } }>;
+}
+
+export default function ContactSection({ address, email, phone, meetingTimes }: IContactSectionProps) {
   return (
     <section id="contact" className="bg-white py-16 md:py-24">
         <div className="container mx-auto">
@@ -23,7 +30,7 @@ export default function ContactSection() {
                     <div>
                     <p className="font-medium text-black">Address</p>
                     <p className="text-muted-foreground text-gray-600">
-                        123 University Ave, Campus Building, Room 101
+                        {address}
                     </p>
                     </div>
                 </div>
@@ -31,14 +38,14 @@ export default function ContactSection() {
                     <Mail className="mr-3 h-5 w-5 text-amber-500" />
                     <div>
                     <p className="font-medium text-black">Email</p>
-                    <p className="text-muted-foreground text-gray-600">info@alphaomega.org</p>
+                    <p className="text-muted-foreground text-gray-600">{email}</p>
                     </div>
                 </div>
                 <div className="flex items-start">
                     <Phone className="mr-3 h-5 w-5 text-amber-500" />
                     <div>
                     <p className="font-medium text-black">Phone</p>
-                    <p className="text-muted-foreground text-gray-600">(555) 123-4567</p>
+                    <p className="text-muted-foreground text-gray-600">{phone}</p>
                     </div>
                 </div>
                 </div>
@@ -46,21 +53,16 @@ export default function ContactSection() {
             <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
                 <h3 className="mb-4 text-xl font-bold text-black">Meeting Times</h3>
                 <div className="space-y-3">
-                <div className="flex justify-between">
-                    <span className="font-medium text-black">Bible Study</span>
-                    <span className="text-muted-foreground text-gray-600">Thursdays, 7:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                    <span className="font-medium text-black">Chapter Meeting</span>
-                    <span className="text-muted-foreground text-gray-600">Mondays, 6:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                    <span className="font-medium text-black">Prayer Breakfast</span>
-                    <span className="text-muted-foreground text-gray-600">Wednesdays, 8:00 AM</span>
+                {meetingTimes.map((meeting, index) => (
+                    <div key={index} className="flex justify-between">
+                        <span className="font-medium text-black">{meeting.fields.eventName}</span>
+                        <span className="text-muted-foreground text-gray-600">{meeting.fields.day}, {meeting.fields.time}</span>
+                    </div>
+                ))}
                 </div>
                 </div>
             </div>
-            </div>
+            
             <ContactForm />
         </div>
         </div>

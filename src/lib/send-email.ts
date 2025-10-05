@@ -5,7 +5,7 @@ export async function sendEmail(data: ContactFormInputs): Promise<boolean> {
     if (!process.env.NEXT_PUBLIC_WEB3FORMS_API_URL) {
         throw new Error('WEB3FORMS_API_URL environment variable is not defined');
     }
-    console.log(process.env.NEXT_PUBLIC_WEB3FORMS_PUBLIC_ACCESS_KEY)
+    
     const response = await fetch(process.env.NEXT_PUBLIC_WEB3FORMS_API_URL, {
         method: 'POST',
         headers: {
@@ -23,7 +23,6 @@ export async function sendEmail(data: ContactFormInputs): Promise<boolean> {
     });
 
     const result = await response.json();
-    console.log('Web3Forms Response:', result);
 
     return result.success;
 };

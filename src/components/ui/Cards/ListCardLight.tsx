@@ -2,7 +2,7 @@ import { MapPin } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 
-interface IEventData {
+interface IListCardLightData {
   imageSrc: string;
   imageAlt: string;
   timing: string;
@@ -11,7 +11,7 @@ interface IEventData {
   location: string;
 }
 
-export default function EventCard({imageSrc, imageAlt, timing, title, description, location}: IEventData) {
+export default function ListCardLight({imageSrc, imageAlt, timing, title, description, location}: IListCardLightData) {
   return (
     <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
         <div className="relative h-48">
